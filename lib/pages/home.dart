@@ -63,7 +63,7 @@ class _HomeState extends State<Home> {
                     context.read<vizyonCubit>().searchFilm(value);
                   },
                   decoration: InputDecoration(
-                    labelText: "Ara...",
+                    labelText: "Ara",
                     labelStyle: TextStyle(color: Colors.white),
                     prefixIcon: Icon(
                       Icons.search,
