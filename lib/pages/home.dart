@@ -42,7 +42,7 @@ class _HomeState extends State<Home> {
                   Padding(
                     padding: EdgeInsets.only(left: 15.0),
                     child: Text(
-                      "Filmler ve Filimler",
+                      "Netflix",
                       style:
                           TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
                     ),
