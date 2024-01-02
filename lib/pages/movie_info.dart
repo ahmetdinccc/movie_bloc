@@ -60,7 +60,7 @@ class _MovieInfoState extends State<MovieInfo> {
     child: Column(
       children: <Widget>[
         Text(
-          "Filmin Konusu:",
+          "Filmin Konusu",
           style: TextStyle(
             fontWeight: FontWeight.bold,
             fontSize: 20,
