@@ -1,5 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:http/http.dart';
+import 'package:movie_bloc/models/models/film/film.dart';
 import 'package:movie_bloc/repository/repository/film/film_repository.dart';
 
 import 'film_state.dart';
@@ -32,24 +33,28 @@ class vizyonCubit extends Cubit<vizyonState> {
       emit(vizyonError("hops internet bağlantisi Koptu"));
     }
   }
-
-Future<void> searchFilm(String filmName) async {
+Future<void> searchFilm(String name) async {
   try {
     emit(vizyonLoading());
-    final response = await _vizyonRepository.searchFilm(filmName);
+        final response = await _vizyonRepository.searchFilm(name);
 
-    
 
+    final vizyonResponse = await _vizyonRepository.searchFilm(name);
+    final populerResponse = await _vizyonRepository.searchFilm(name);
+
+ 
+    final List<Film> combinedResponse = [...vizyonResponse, ...populerResponse];
+
+    emit(vizyonCompleted(combinedResponse));
   } on NetworkError catch (e) {
-    emit(vizyonError(e.message));
-  } catch (e) {
-    emit(vizyonError("ARADIĞINIZ FİLM BULUNAMAMIŞTIR"));
+    if (e.statusCode == 404) {
+      emit(vizyonError("Yeni mesaj"));
+    } else {
+      emit(vizyonError("ARADIĞINIZ FİLM BULUNAMAMIŞTIR"));
+    }
   }
 }
 
-    
-  
-  }
 
 
 
@@ -59,3 +64,6 @@ Future<void> searchFilm(String filmName) async {
 
 
 
+
+
+}

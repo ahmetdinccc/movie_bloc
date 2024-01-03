@@ -106,11 +106,9 @@ class _HomeState extends State<Home> {
               BlocConsumer<vizyonCubit, vizyonState>(
                 listener: (context, state) {
                   if (state is vizyonError) {
-                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                      content: Text("ARADIĞINIZ FİLM BULUNAMAMIŞTIR",textAlign: TextAlign.center,),
-                      backgroundColor: Colors.red,
-                    ));
+                   
                   }
+                  
                 },
                 builder: (context, state) {
                   if (state is vizyonInitial) {
