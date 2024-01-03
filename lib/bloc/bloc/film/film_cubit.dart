@@ -38,7 +38,7 @@ Future<void> searchFilm(String filmName) async {
     emit(vizyonLoading());
     final response = await _vizyonRepository.searchFilm(filmName);
 
-    // Burada API'den dönen response ile ilgili işlemleri yapabilirsiniz.
+    
 
   } on NetworkError catch (e) {
     emit(vizyonError(e.message));
