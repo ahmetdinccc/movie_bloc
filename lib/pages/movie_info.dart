@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:movie_bloc/pages/home.dart';
+import 'package:movie_bloc/pages/video_player.dart';
 
 class MovieInfo extends StatefulWidget {
   const MovieInfo({
@@ -7,11 +8,13 @@ class MovieInfo extends StatefulWidget {
     required this.name,
     required this.avatar,
     required this.contents,
+    required this.trailer,
   });
 
   final String name;
   final String avatar;
   final String contents;
+  final String trailer;
 
   @override
   State<MovieInfo> createState() => _MovieInfoState();
@@ -54,24 +57,38 @@ class _MovieInfoState extends State<MovieInfo> {
                           borderRadius: BorderRadius.only(
                               topLeft: Radius.circular(40),
                               topRight: Radius.circular(40))),
-                     child: Padding(
-  padding: const EdgeInsets.only(left: 20, top: 200),
-  child: Center(
-    child: Column(
-      children: <Widget>[
-        Text(
-          "Filmin Konusu",
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-            fontSize: 20,
-          ),
-        ),
-        Text(widget.contents,style: TextStyle(fontSize: 18),),
-      ],
-    ),
-  ),
-),
-
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 20, top: 200),
+                        child: Center(
+                          child: Column(
+                            children: <Widget>[
+                              Text(
+                                "Filmin Konusu",
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 20,
+                                ),
+                              ),
+                              Text(
+                                widget.contents,
+                                style: TextStyle(fontSize: 18),
+                              ),
+                              ElevatedButton(
+                                  onPressed: () {
+                                    Navigator.pushAndRemoveUntil(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            Video(trailer: widget.trailer),
+                                      ),
+                                      (route) => false,
+                                    );
+                                  },
+                                  child: Text("Filmin Fragmanını İzle"))
+                            ],
+                          ),
+                        ),
+                      ),
                     ),
                     Padding(
                       padding: const EdgeInsets.only(top: 50, left: 120),

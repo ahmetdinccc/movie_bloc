@@ -22,7 +22,7 @@ int currentPage=0;
   final TextEditingController _searchController = TextEditingController();
   final List<Film> vizyonList = [];
   final List<Film> populerList = [];
-  int _selectedIndex = 0; // Eklenen satır
+  int _selectedIndex = 0; 
 
   @override
   void initState() {
@@ -165,7 +165,7 @@ int currentPage=0;
                       builder: (context) => MovieInfo(
                         name: vizyonList[index].name ?? '',
                         avatar: vizyonList[index].avatar,
-                        contents: vizyonList[index].contents ?? '',
+                        contents: vizyonList[index].contents ?? '', trailer: '',
                       ),
                     ),
                   );
@@ -223,7 +223,7 @@ int currentPage=0;
                       builder: (context) => MovieInfo(
                         name: populerList[index].name ?? '',
                         avatar: populerList[index].avatar,
-                        contents: populerList[index].contents ?? '',
+                        contents: populerList[index].contents ?? '', trailer: '',
                       ),
                     ),
                   );

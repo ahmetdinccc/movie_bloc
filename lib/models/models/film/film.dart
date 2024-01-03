@@ -2,12 +2,15 @@ class Film {
   String? name;
   String avatar;
   String? contents;
+  String? trailer;
   String? id;
+  
 
   Film({
     required this.name,
     required this.avatar,
     required this.contents,
+    required this.trailer,
     required this.id,
   });
 
@@ -15,6 +18,7 @@ class Film {
       : name = json['name'],
         avatar = json['avatar'],
         contents = json['contents'],
+        trailer=json['trailer'],
         id = json['id'];
 
   Map<String, dynamic> toJson() {
@@ -22,6 +26,7 @@ class Film {
       'name': name,
       'avatar': avatar,
       'contents': contents,
+      'trailer':trailer,
       'id': id.toString(),
     };
   }
