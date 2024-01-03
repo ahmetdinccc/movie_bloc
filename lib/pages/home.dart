@@ -14,17 +14,23 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+int currentPage=0;
+
+
   late FocusNode _focusNode;
   bool _showDeleteIcon = false;
   final TextEditingController _searchController = TextEditingController();
   final List<Film> vizyonList = [];
   final List<Film> populerList = [];
+  int _selectedIndex = 0; // Eklenen satır
+
   @override
   void initState() {
     super.initState();
     context.read<vizyonCubit>().getVizyon();
     context.read<vizyonCubit>().getPopuler();
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -70,12 +76,13 @@ class _HomeState extends State<Home> {
                       color: Colors.white,
                     ),
                     suffixIcon: IconButton(
-                        onPressed: () {
-                          _searchController.clear();
-                               context.read<vizyonCubit>().getPopuler();
-                    context.read<vizyonCubit>().getVizyon();
-                        },
-                        icon: Icon(Icons.delete_forever)),
+                      onPressed: () {
+                        _searchController.clear();
+                        context.read<vizyonCubit>().getPopuler();
+                        context.read<vizyonCubit>().getVizyon();
+                      },
+                      icon: Icon(Icons.delete_forever),
+                    ),
                     border: InputBorder.none,
                   ),
                 ),
@@ -105,15 +112,10 @@ class _HomeState extends State<Home> {
               ),
               BlocConsumer<vizyonCubit, vizyonState>(
                 listener: (context, state) {
-                  if (state is vizyonError) {
-                   
-                  }
-                  
+                  if (state is vizyonError) {}
                 },
                 builder: (context, state) {
                   if (state is vizyonInitial) {
-           
-
                     return buildCenterLoading();
                   } else if (state is vizyonLoading) {
                     return buildCenterLoading();
@@ -134,10 +136,11 @@ class _HomeState extends State<Home> {
                   }
                 },
               ),
-              
             ],
           ),
         ),
+  
+      
       ),
     );
   }
