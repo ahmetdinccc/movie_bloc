@@ -106,7 +106,10 @@ class _HomeState extends State<Home> {
               BlocConsumer<vizyonCubit, vizyonState>(
                 listener: (context, state) {
                   if (state is vizyonError) {
-                   
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                      content: Text("",textAlign: TextAlign.center,),
+                      backgroundColor: const Color.fromARGB(255, 255, 255, 255),
+                    ));
                   }
                   
                 },

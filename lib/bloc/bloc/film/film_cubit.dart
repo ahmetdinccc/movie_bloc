@@ -36,13 +36,11 @@ class vizyonCubit extends Cubit<vizyonState> {
 Future<void> searchFilm(String name) async {
   try {
     emit(vizyonLoading());
-        final response = await _vizyonRepository.searchFilm(name);
-
-
+    
     final vizyonResponse = await _vizyonRepository.searchFilm(name);
     final populerResponse = await _vizyonRepository.searchFilm(name);
 
- 
+    // Burada vizyonResponse ve populerResponse'ı birleştirebilirsiniz
     final List<Film> combinedResponse = [...vizyonResponse, ...populerResponse];
 
     emit(vizyonCompleted(combinedResponse));
