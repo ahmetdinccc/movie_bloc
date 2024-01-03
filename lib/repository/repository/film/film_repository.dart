@@ -71,7 +71,7 @@ class SampleVizyonRepository implements VizyonRepository {
   @override
   Future<List<Film>> searchFilm(String name) async {
     try {
-      final response = await http.get(Uri.parse('$vizyonUrl?search=$name'));
+      final response = await http.get(Uri.parse('$vizyonUrl?search=$name&$populerUrl?search=$name'));
 
       if (response.statusCode == HttpStatus.ok) {
         final List<dynamic> jsonData = jsonDecode(response.body);

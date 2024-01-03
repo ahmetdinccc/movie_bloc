@@ -10,18 +10,14 @@ class vizyonCubit extends Cubit<vizyonState> {
 
   vizyonCubit(this._vizyonRepository) : super(vizyonInitial());
 
-  Future<void> getVizyon() async {
+   Future<void> getVizyon() async {
+   
     try {
       emit(vizyonLoading());
       final response = await _vizyonRepository.getVizyon();
       emit(vizyonCompleted(response));
     } on NetworkError catch (e) {
-      if(e.statusCode ==404){
-         emit(vizyonError("yeni mesaj"));
-      }else{
       emit(vizyonError(e.message));
-      }
-
     }
   }
 
@@ -42,18 +38,21 @@ Future<void> searchFilm(String filmName) async {
     emit(vizyonLoading());
     final response = await _vizyonRepository.searchFilm(filmName);
 
-  }
-  
-   on NetworkError catch (e) {
-    if (e.statusCode == 404) {
-      emit(vizyonError("Yeni mesaj"));
-    } else {
-      emit(vizyonError("ARADIĞINIZ FİLM BULUNAMAMIŞTIR"));
-    }
+    // Burada API'den dönen response ile ilgili işlemleri yapabilirsiniz.
+
+  } on NetworkError catch (e) {
+    emit(vizyonError(e.message));
+  } catch (e) {
+    emit(vizyonError("ARADIĞINIZ FİLM BULUNAMAMIŞTIR"));
   }
 }
 
-}
+    
+  
+  }
+
+
+
 
 
 
