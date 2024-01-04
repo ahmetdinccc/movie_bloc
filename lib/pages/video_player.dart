@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:movie_bloc/pages/home.dart';
 import 'package:video_player/video_player.dart';
 import 'package:chewie/chewie.dart';
 
@@ -56,6 +57,14 @@ class _VideoplayerState extends State<Videoplayer> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+
+        actions: [
+          IconButton(onPressed: (){
+            Navigator.push(context, MaterialPageRoute(builder: (context)=>Home()));
+          }, icon: Icon(Icons.arrow_back))
+        ],
+      ),
       body: Video(
         videoPlayerController: VideoPlayerController.network(widget.videoData),
         trailer: widget.videoData,
