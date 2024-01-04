@@ -10,8 +10,9 @@ class Video extends StatefulWidget {
   final String trailer;
   final VideoPlayerController videoPlayerController;
   final bool loop;
+  final bool autoplay;
 
-  Video({required this.videoPlayerController, this.loop = false, required this.trailer, Key? key})
+  Video({required this.videoPlayerController, this.loop = false, this.autoplay=false,required this.trailer, Key? key})
       : super(key: key);
 
   @override
@@ -27,7 +28,8 @@ class _VideoState extends State<Video> {
     _chewieController = ChewieController(
       videoPlayerController: widget.videoPlayerController,
       looping: widget.loop,
-      aspectRatio: 16 / 100,
+      aspectRatio: 16 / 8,
+      autoPlay: widget.autoplay,
       autoInitialize: true,
     );
   }
