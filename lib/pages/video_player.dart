@@ -8,7 +8,11 @@ class Video extends StatefulWidget {
   final VideoPlayerController videoPlayerController;
   final bool loop;
 
-  Video({required this.videoPlayerController, this.loop = false, required this.trailer, Key? key})
+  Video(
+      {required this.videoPlayerController,
+      this.loop = false,
+      required this.trailer,
+      Key? key})
       : super(key: key);
 
   @override
@@ -39,7 +43,6 @@ class _VideoState extends State<Video> {
   @override
   void dispose() {
     super.dispose();
-    widget.videoPlayerController.dispose();
     _chewieController.dispose();
   }
 }
@@ -54,21 +57,37 @@ class Videoplayer extends StatefulWidget {
 }
 
 class _VideoplayerState extends State<Videoplayer> {
+  late VideoPlayerController _videoPlayerController;
+
+  @override
+  void initState() {
+    super.initState();
+    _videoPlayerController = VideoPlayerController.network(widget.videoData);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-
         actions: [
-          IconButton(onPressed: (){
-            Navigator.push(context, MaterialPageRoute(builder: (context)=>Home()));
-          }, icon: Icon(Icons.arrow_back))
+          IconButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            icon: Icon(Icons.arrow_back),
+          )
         ],
       ),
       body: Video(
-        videoPlayerController: VideoPlayerController.network(widget.videoData),
+        videoPlayerController: _videoPlayerController,
         trailer: widget.videoData,
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _videoPlayerController.dispose();
   }
 }
