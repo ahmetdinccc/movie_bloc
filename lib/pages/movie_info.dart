@@ -73,25 +73,28 @@ class _MovieInfoState extends State<MovieInfo> {
                                 widget.contents,
                                 style: TextStyle(fontSize: 18),
                               ),
-                             ElevatedButton(
-  onPressed: () {
-    Navigator.pushAndRemoveUntil(
-      context,
-      MaterialPageRoute(
-        builder: (context) => Videoplayer(videoData: widget.trailer),
-      ),
-      (route) => false,
-    );
-  },
-  child: Row(
-    mainAxisAlignment: MainAxisAlignment.center,
-    children: [
-      Icon(Icons.play_arrow), 
-      SizedBox(width: 8), 
-      Text("Filmin Fragmanını İzle"),
-    ],
-  ),
-)
+                             Padding(
+                               padding: const EdgeInsets.only(top: 15),
+                               child: ElevatedButton(
+                                 onPressed: () {
+                                   Navigator.pushAndRemoveUntil(
+                                     context,
+                                     MaterialPageRoute(
+                                       builder: (context) => Videoplayer(videoData: widget.trailer),
+                                     ),
+                                     (route) => false,
+                                   );
+                                 },
+                                 child: Row(
+                                   mainAxisAlignment: MainAxisAlignment.center,
+                                   children: [
+                                     Icon(Icons.play_arrow), 
+                                     SizedBox(width: 10), 
+                                     Text("Filmin Fragmanını İzle"),
+                                   ],
+                                 ),
+                               ),
+                             )
 
                             ],
                           ),
