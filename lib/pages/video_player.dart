@@ -62,6 +62,7 @@ class _VideoplayerState extends State<Videoplayer> {
   void initState() {
     super.initState();
     _videoPlayerController = VideoPlayerController.network(widget.videoData);
+   
   }
 
   @override
@@ -71,7 +72,7 @@ class _VideoplayerState extends State<Videoplayer> {
         actions: [
           IconButton(
             onPressed: () {
-              Navigator.pop(context);
+             Navigator.push(context, MaterialPageRoute(builder: (context)=>Home()));
             },
             icon: Icon(Icons.arrow_back),
           )
