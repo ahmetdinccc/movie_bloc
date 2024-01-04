@@ -4,15 +4,14 @@ import 'package:video_player/video_player.dart';
 import 'package:chewie/chewie.dart';
 
 class Video extends StatefulWidget {
+
+ 
+
   final String trailer;
   final VideoPlayerController videoPlayerController;
   final bool loop;
 
-  Video(
-      {required this.videoPlayerController,
-      this.loop = false,
-      required this.trailer,
-      Key? key})
+  Video({required this.videoPlayerController, this.loop = false, required this.trailer, Key? key})
       : super(key: key);
 
   @override
