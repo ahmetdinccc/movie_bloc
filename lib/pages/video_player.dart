@@ -1,65 +1,65 @@
 import 'package:flutter/material.dart';
-import 'package:movie_bloc/pages/home.dart';
 import 'package:video_player/video_player.dart';
+import 'package:chewie/chewie.dart';
 
 class Video extends StatefulWidget {
-  const Video({
-    Key? key,
-    required this.trailer,
-  }) : super(key: key);
-
   final String trailer;
+  final VideoPlayerController videoPlayerController;
+  final bool loop;
+
+  Video({required this.videoPlayerController, this.loop = false, required this.trailer, Key? key})
+      : super(key: key);
 
   @override
   State<Video> createState() => _VideoState();
 }
 
 class _VideoState extends State<Video> {
-  //late ChewieController _chewieController;
+  late ChewieController _chewieController;
 
   @override
   void initState() {
     super.initState();
-    //_chewieController = ChewieController(
-    //   videoPlayerController: VideoPlayerController.network(widget.trailer),
-    //   aspectRatio: 16 / 9,
-    //   autoInitialize: true,
-    //   looping: false, // You can set looping as per your requirement
-    // );
+    _chewieController = ChewieController(
+      videoPlayerController: widget.videoPlayerController,
+      looping: widget.loop,
+      aspectRatio: 16 / 9,
+      autoInitialize: true,
+    );
   }
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
-          appBar: AppBar(
-        backgroundColor: Colors.red,
-         actions:[IconButton(onPressed: (){Navigator.push(context, MaterialPageRoute(builder: (context)=>Home()));}, icon: Icon(Icons.arrow_back))]
-      ),
-     
-      ),
+    return Chewie(
+      controller: _chewieController,
     );
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    widget.videoPlayerController.dispose();
+    _chewieController.dispose();
   }
 }
 
-class VideoPlayerScreen extends StatefulWidget {
+class Videoplayer extends StatefulWidget {
   final String videoData;
 
-  VideoPlayerScreen({required this.videoData});
+  Videoplayer({required this.videoData});
 
   @override
-  State<VideoPlayerScreen> createState() => _VideoPlayerScreenState();
+  State<Videoplayer> createState() => _VideoplayerState();
 }
 
-class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
+class _VideoplayerState extends State<Videoplayer> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Video Player'),
+      body: Video(
+        videoPlayerController: VideoPlayerController.network(widget.videoData),
+        trailer: widget.videoData,
       ),
-      body: Video(trailer: widget.videoData),
     );
   }
 }

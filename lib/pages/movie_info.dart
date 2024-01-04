@@ -79,7 +79,7 @@ class _MovieInfoState extends State<MovieInfo> {
                                       context,
                                       MaterialPageRoute(
                                         builder: (context) =>
-                                            Video(trailer: widget.trailer),
+                                            Videoplayer(videoData:widget.trailer),
                                       ),
                                       (route) => false,
                                     );
