@@ -17,7 +17,7 @@ class vizyonCubit extends Cubit<vizyonState> {
       emit(vizyonLoading());
       final response = await _vizyonRepository.getVizyon();
       emit(vizyonCompleted(response));
-    } on NetworkError catch (e) {
+    } on NetworkError catch (_) {
       emit(vizyonError("hops internet bağlantisi Koptu"));
     }
   }
