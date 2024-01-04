@@ -165,7 +165,7 @@ int currentPage=0;
                       builder: (context) => MovieInfo(
                         name: vizyonList[index].name ?? '',
                         avatar: vizyonList[index].avatar,
-                        contents: vizyonList[index].contents ?? '', trailer: '',
+                        contents: vizyonList[index].contents ?? '', trailer: populerList[index].trailer??'',
                       ),
                     ),
                   );
@@ -223,7 +223,7 @@ int currentPage=0;
                       builder: (context) => MovieInfo(
                         name: populerList[index].name ?? '',
                         avatar: populerList[index].avatar,
-                        contents: populerList[index].contents ?? '', trailer: '',
+                        contents: populerList[index].contents ?? '', trailer: populerList[index].trailer??'',
                       ),
                     ),
                   );

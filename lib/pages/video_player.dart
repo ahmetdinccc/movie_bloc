@@ -43,9 +43,16 @@ class _VideoState extends State<Video> {
 
   @override
   void dispose() {
-    super.dispose();
+    
+    
+widget.videoPlayerController.dispose();
     _chewieController.dispose();
-  }
+    
+    super.dispose();
+    
+    
+    
+    }
 }
 
 class Videoplayer extends StatefulWidget {
@@ -66,15 +73,22 @@ class _VideoplayerState extends State<Videoplayer> {
     _videoPlayerController = VideoPlayerController.network(widget.videoData);
    
   }
+  @override
+  void dispose() {
+     
+
+    super.dispose();
+  }
+  
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext Home) {
     return Scaffold(
       appBar: AppBar(
         actions: [
           IconButton(
             onPressed: () {
-             Navigator.push(context, MaterialPageRoute(builder: (context)=>Home()));
+            Navigator.pop(Home);
             },
             icon: Icon(Icons.arrow_back),
           )
@@ -87,9 +101,4 @@ class _VideoplayerState extends State<Videoplayer> {
     );
   }
 
-  @override
-  void dispose() {
-    super.dispose();
-    _videoPlayerController.dispose();
-  }
 }

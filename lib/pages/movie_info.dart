@@ -16,6 +16,7 @@ class MovieInfo extends StatefulWidget {
   final String contents;
   final String trailer;
 
+
   @override
   State<MovieInfo> createState() => _MovieInfoState();
 }
@@ -77,12 +78,12 @@ class _MovieInfoState extends State<MovieInfo> {
                                padding: const EdgeInsets.only(top: 15),
                                child: ElevatedButton(
                                  onPressed: () {
-                                   Navigator.pushAndRemoveUntil(
+                                   Navigator.push(
                                      context,
                                      MaterialPageRoute(
                                        builder: (context) => Videoplayer(videoData: widget.trailer),
                                      ),
-                                     (route) => false,
+                                    
                                    );
                                  },
                                  child: Row(
