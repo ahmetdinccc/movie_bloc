@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:movie_bloc/pages/home.dart';
 import 'package:video_player/video_player.dart';
 import 'package:chewie/chewie.dart';
 
@@ -12,7 +11,7 @@ class Video extends StatefulWidget {
   final bool loop;
   final bool autoplay;
 
-  Video({required this.videoPlayerController, this.loop = false, this.autoplay=false,required this.trailer, Key? key})
+  const Video({required this.videoPlayerController, this.loop = false, this.autoplay=false,required this.trailer, Key? key})
       : super(key: key);
 
   @override
@@ -58,7 +57,7 @@ widget.videoPlayerController.dispose();
 class Videoplayer extends StatefulWidget {
   final String videoData;
 
-  Videoplayer({required this.videoData});
+  const Videoplayer({super.key, required this.videoData});
 
   @override
   State<Videoplayer> createState() => _VideoplayerState();
@@ -70,7 +69,8 @@ class _VideoplayerState extends State<Videoplayer> {
   @override
   void initState() {
     super.initState();
-    _videoPlayerController = VideoPlayerController.network(widget.videoData);
+  
+    _videoPlayerController = VideoPlayerController.networkUrl(Uri.tryParse(widget.videoData)??Uri());
    
   }
   @override
@@ -82,15 +82,15 @@ class _VideoplayerState extends State<Videoplayer> {
   
 
   @override
-  Widget build(BuildContext Home) {
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         actions: [
           IconButton(
             onPressed: () {
-            Navigator.pop(Home);
+            Navigator.pop(context);
             },
-            icon: Icon(Icons.arrow_back),
+            icon: const Icon(Icons.arrow_back),
           )
         ],
       ),

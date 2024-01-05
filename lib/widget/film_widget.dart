@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:movie_bloc/bloc/bloc/film/film_cubit.dart';
 
 
 
@@ -34,8 +32,8 @@ class _FilmwidgetState extends State<Filmwidget> {
   Widget build(BuildContext context) {
     
     return Card(
-  color: Color.fromARGB(255, 255, 255, 255),
-  child: Container(
+  color: const Color.fromARGB(255, 255, 255, 255),
+  child: SizedBox(
     width: 150, 
     
     child: Column(
@@ -51,13 +49,13 @@ class _FilmwidgetState extends State<Filmwidget> {
           ),
         ),
         Padding(
-          padding: EdgeInsets.all(16.0),
+          padding: const EdgeInsets.all(16.0),
           child: Text(
             widget.name,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.bold,
-              color: const Color.fromARGB(255, 0, 0, 0),
+              color: Color.fromARGB(255, 0, 0, 0),
             ),
           ),
         ),

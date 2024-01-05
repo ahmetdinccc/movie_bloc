@@ -1,54 +1,59 @@
 import 'package:flutter/foundation.dart';
 import 'package:movie_bloc/models/models/film/film.dart';
 
-abstract class vizyonState{
-  vizyonState();
-}
 
-
-class vizyonInitial extends vizyonState{
-  vizyonInitial();
-
-}
-
-
-class vizyonLoading extends vizyonState{
-  vizyonLoading();
+abstract class VizyonState{
+  VizyonState();
 }
 
 
 
-class vizyonCompleted extends vizyonState{
+class VizyonInitial extends VizyonState{
+  VizyonInitial();
+
+}
+
+
+class VizyonLoading extends VizyonState{
+  VizyonLoading();
+}
+
+
+
+class VizyonCompleted extends VizyonState{
   final List<Film>response;
-  vizyonCompleted(this.response);
+  VizyonCompleted(this.response);
 
 
   @override
-  bool operator==(Object o){
-    if(identical(this,o)) return true;
-    return o is vizyonCompleted && listEquals(o.response,response);
+  bool operator==(Object other){
+    if(identical(this,other)) return true;
+    return other is VizyonCompleted && listEquals(other.response,response);
   }
   @override
   int get hashCode=>response.hashCode;
 
 }
 
-class vizyonError extends vizyonState{
+
+class VizyonError extends VizyonState{
   final String message;
-  vizyonError(this.message);
+  VizyonError(this.message);
 }
 
 
 
-class populerCompleted extends vizyonState{
+
+class PopulerCompleted extends VizyonState{
   final List<Film>response;
-  populerCompleted(this.response);
+  PopulerCompleted(this.response);
+
 
 
   @override
-  bool operator==(Object o){
-    if(identical(this,o)) return true;
-    return o is vizyonCompleted && listEquals(o.response,response);
+  bool operator==(Object other){
+    if(identical(this,other)) return true;
+    return other is VizyonCompleted && listEquals(other.response,response);
   }
   @override
   int get hashCode=>response.hashCode;

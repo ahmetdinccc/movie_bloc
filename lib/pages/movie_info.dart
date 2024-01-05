@@ -26,20 +26,20 @@ class _MovieInfoState extends State<MovieInfo> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-        backgroundColor: Color.fromARGB(255, 25, 89, 132),
+        backgroundColor: const Color.fromARGB(255, 25, 89, 132),
         appBar: AppBar(
           title: Text(
             widget.name,
-            style: TextStyle(fontSize: 20, color: Colors.white),
+            style: const TextStyle(fontSize: 20, color: Colors.white),
           ),
-          backgroundColor: Color.fromARGB(255, 25, 89, 132),
+          backgroundColor: const Color.fromARGB(255, 25, 89, 132),
           elevation: 0,
           leading: IconButton(
-            icon: Icon(Icons.arrow_back),
+            icon: const Icon(Icons.arrow_back),
             color: Colors.white,
             onPressed: () {
               Navigator.push(
-                  context, MaterialPageRoute(builder: (context) => Home()));
+                  context, MaterialPageRoute(builder: (context) => const Home()));
             },
           ),
         ),
@@ -51,9 +51,9 @@ class _MovieInfoState extends State<MovieInfo> {
                 child: Stack(
                   children: <Widget>[
                     Container(
-                      margin: EdgeInsets.only(top: 200),
+                      margin: const EdgeInsets.only(top: 200),
                       height: 700,
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.only(
                               topLeft: Radius.circular(40),
@@ -63,7 +63,7 @@ class _MovieInfoState extends State<MovieInfo> {
                         child: Center(
                           child: Column(
                             children: <Widget>[
-                              Text(
+                              const Text(
                                 "Filmin Konusu",
                                 style: TextStyle(
                                   fontWeight: FontWeight.bold,
@@ -72,7 +72,7 @@ class _MovieInfoState extends State<MovieInfo> {
                               ),
                               Text(
                                 widget.contents,
-                                style: TextStyle(fontSize: 18),
+                                style: const TextStyle(fontSize: 18),
                               ),
                              Padding(
                                padding: const EdgeInsets.only(top: 15),
@@ -86,7 +86,7 @@ class _MovieInfoState extends State<MovieInfo> {
                                     
                                    );
                                  },
-                                 child: Row(
+                                 child: const Row(
                                    mainAxisAlignment: MainAxisAlignment.center,
                                    children: [
                                      Icon(Icons.play_arrow), 

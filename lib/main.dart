@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
       home: MultiBlocProvider(
         providers: [
           BlocProvider(
-            create: (context) => vizyonCubit(SampleVizyonRepository()),
+            create: (context) => VizyonCubit(SampleVizyonRepository()),
           ),
         ],
         child: const MyHomePage(),
@@ -32,16 +32,17 @@ class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key}) : super(key: key);
 
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+
+  MyHomePageState createState() => MyHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class MyHomePageState extends State<MyHomePage> {
   int _currentIndex = 0;
 
   final List<Widget> _pages = [
-    Home(),
+    const Home(),
     
-    Profile(),
+    const Profile(),
   ];
 
   @override
@@ -55,7 +56,7 @@ class _MyHomePageState extends State<MyHomePage> {
             _currentIndex = index;
           });
         },
-        items: [
+        items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
             label: 'Anasayfa',

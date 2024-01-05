@@ -17,18 +17,15 @@ class _HomeState extends State<Home> {
 int currentPage=0;
 
 
-  late FocusNode _focusNode;
-  bool _showDeleteIcon = false;
   final TextEditingController _searchController = TextEditingController();
   final List<Film> vizyonList = [];
   final List<Film> populerList = [];
-  int _selectedIndex = 0; 
 
   @override
   void initState() {
     super.initState();
-    context.read<vizyonCubit>().getVizyon();
-    context.read<vizyonCubit>().getPopuler();
+    context.read<VizyonCubit>().getVizyon();
+    context.read<VizyonCubit>().getPopuler();
   }
 
 
@@ -41,8 +38,8 @@ int currentPage=0;
           keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
           child: Column(
             children: [
-              Padding(padding: EdgeInsets.only(top: 38.5)),
-              Row(
+              const Padding(padding: EdgeInsets.only(top: 38.5)),
+              const Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Padding(
@@ -60,76 +57,74 @@ int currentPage=0;
                   color: Colors.grey,
                   borderRadius: BorderRadius.circular(25),
                 ),
-                margin: EdgeInsets.only(right: 10, left: 10, top: 20),
+                margin: const EdgeInsets.only(right: 10, left: 10, top: 20),
                 padding:
-                    EdgeInsets.only(right: 15, left: 15, top: 5, bottom: 5),
+                    const EdgeInsets.only(right: 15, left: 15, top: 5, bottom: 5),
                 child: TextFormField(
                   controller: _searchController,
                   onChanged: (value) {
-                    context.read<vizyonCubit>().searchFilm(value);
+                    context.read<VizyonCubit>().searchFilm(value);
                   },
                   decoration: InputDecoration(
                     labelText: "Ara",
-                    labelStyle: TextStyle(color: Colors.white),
-                    prefixIcon: Icon(
+                    labelStyle: const TextStyle(color: Colors.white),
+                    prefixIcon: const Icon(
                       Icons.search,
                       color: Colors.white,
                     ),
                     suffixIcon: IconButton(
                       onPressed: () {
                         _searchController.clear();
-                        context.read<vizyonCubit>().getPopuler();
-                        context.read<vizyonCubit>().getVizyon();
+                        context.read<VizyonCubit>().getPopuler();
+                        context.read<VizyonCubit>().getVizyon();
                       },
-                      icon: Icon(Icons.delete_forever),
+                      icon: const Icon(Icons.delete_forever),
                     ),
                     border: InputBorder.none,
                   ),
                 ),
               ),
-              Container(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(left: 15, top: 5),
-                      child: Text(
-                        "Vizyondaki Filmler",
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 20),
-                      ),
+              const Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Padding(
+                    padding: EdgeInsets.only(left: 15, top: 5),
+                    child: Text(
+                      "Vizyondaki Filmler",
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold, fontSize: 20),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.only(right: 15, top: 5),
-                      child: Text(
-                        "İncele",
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 15),
-                      ),
-                    )
-                  ],
-                ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(right: 15, top: 5),
+                    child: Text(
+                      "İncele",
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold, fontSize: 15),
+                    ),
+                  )
+                ],
               ),
-              BlocConsumer<vizyonCubit, vizyonState>(
+              BlocConsumer<VizyonCubit, VizyonState>(
                 listener: (context, state) {
-                  if (state is vizyonError) {}
+                  if (state is VizyonError) {}
                 },
                 builder: (context, state) {
-                  if (state is vizyonInitial) {
+                  if (state is VizyonInitial) {
                     return buildCenterLoading();
-                  } else if (state is vizyonLoading) {
+                  } else if (state is VizyonLoading) {
                     return buildCenterLoading();
-                  } else if (state is vizyonCompleted) {
+                  } else if (state is VizyonCompleted) {
                     vizyonList.clear();
                     vizyonList.addAll(state.response);
 
                     return buildListViewFilm();
-                  } else if (state is populerCompleted) {
+                  } else if (state is PopulerCompleted) {
                     populerList.clear();
                     populerList.addAll(state.response);
 
                     return buildListViewFilm();
-                  } else if (state is vizyonError) {
+                  } else if (state is VizyonError) {
                     return buildError(state);
                   } else {
                     return buildError(null);
@@ -145,14 +140,14 @@ int currentPage=0;
     );
   }
 
-  Text buildError(vizyonError? state) {
+  Text buildError(VizyonError? state) {
     return Text(state?.message ?? "bir hata oluştu");
   }
 
   Widget buildListViewFilm() {
     return Column(
       children: [
-        Container(
+        SizedBox(
           height: 260,
           child: ListView.builder(
             scrollDirection: Axis.horizontal,
@@ -170,7 +165,7 @@ int currentPage=0;
                     ),
                   );
                 },
-                child: Container(
+                child: SizedBox(
                   width: 150,
                   child: Filmwidget(
                     name: vizyonList[index].name ?? '',
@@ -185,13 +180,13 @@ int currentPage=0;
           ),
         ),
         //POPÜLER FİLMLER
-        Padding(
-          padding: const EdgeInsets.only(top: 10),
+        const Padding(
+          padding: EdgeInsets.only(top: 10),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Padding(
-                padding: const EdgeInsets.only(left: 15, top: 5),
+                padding: EdgeInsets.only(left: 15, top: 5),
                 child: Text(
                   'Popüler Filmler',
                   style: TextStyle(
@@ -201,7 +196,7 @@ int currentPage=0;
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(right: 15, top: 5),
+                padding: EdgeInsets.only(right: 15, top: 5),
                 child: Text(
                   "İncele",
                   style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
@@ -210,7 +205,7 @@ int currentPage=0;
             ],
           ),
         ),
-        Container(
+        SizedBox(
           height: 300,
           child: ListView.builder(
             scrollDirection: Axis.horizontal,
@@ -228,7 +223,7 @@ int currentPage=0;
                     ),
                   );
                 },
-                child: Container(
+                child: SizedBox(
                   width: 150,
                   child: Filmwidget(
                     name: populerList[index].name ?? '',
@@ -247,7 +242,7 @@ int currentPage=0;
   }
 
   Center buildCenterLoading() {
-    return Center(
+    return const Center(
       child: CircularProgressIndicator(
         backgroundColor: Colors.white,
         valueColor: AlwaysStoppedAnimation<Color>(Colors.blue),

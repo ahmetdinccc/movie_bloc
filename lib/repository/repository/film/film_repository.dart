@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 import 'package:movie_bloc/models/models/film/film.dart';
 
@@ -23,19 +24,19 @@ class SampleVizyonRepository implements VizyonRepository {
       if (response.statusCode == HttpStatus.ok) {
         final List<dynamic> jsonData = jsonDecode(response.body);
 
-        if (jsonData is List) {
-          return jsonData
-              .map((e) => Film.fromJson(e as Map<String, dynamic>))
-              .toList();
-        } else {
-          throw NetworkError('Error', 'Unexpected data structure');
-        }
-      } else {
+        return jsonData
+            .map((e) => Film.fromJson(e as Map<String, dynamic>))
+            .toList();
+            } else {
         throw NetworkError(response.statusCode.toString(), response.body);
       }
     } catch (e, stackTrace) {
-      print(stackTrace.toString());
-      print(e.toString());
+      if (kDebugMode) {
+        print(stackTrace.toString());
+      }
+      if (kDebugMode) {
+        print(e.toString());
+      }
       throw NetworkError('Error', e.toString());
     }
   }
@@ -48,7 +49,7 @@ class SampleVizyonRepository implements VizyonRepository {
       final response = await http.get(Uri.parse(populerUrl));
 
       if (response.statusCode == HttpStatus.ok) {
-        final List<dynamic> jsonData = jsonDecode(response.body);
+        final dynamic jsonData = jsonDecode(response.body);
 
         if (jsonData is List) {
           return jsonData
@@ -57,12 +58,18 @@ class SampleVizyonRepository implements VizyonRepository {
         } else {
           throw NetworkError('Error', 'Unexpected data structure');
         }
-      } else {
+      } 
+      
+      else {
         throw NetworkError(response.statusCode.toString(), response.body);
       }
     } catch (e, stackTrace) {
-      print(stackTrace.toString());
-      print(e.toString());
+      if (kDebugMode) {
+        print(stackTrace.toString());
+      }
+      if (kDebugMode) {
+        print(e.toString());
+      }
       throw NetworkError('Error', e.toString());
     }
   }
@@ -77,25 +84,25 @@ Future<List<Film>> searchFilm(String name) async {
       final List<dynamic> vizyonData = jsonDecode(vizyonResponse.body);
       final List<dynamic> populerData = jsonDecode(populerResponse.body);
 
-      if (vizyonData is List && populerData is List) {
-        final List<Film> vizyonFilms = vizyonData
-            .map((e) => Film.fromJson(e as Map<String, dynamic>))
-            .toList();
+      final List<Film> vizyonFilms = vizyonData
+          .map((e) => Film.fromJson(e as Map<String, dynamic>))
+          .toList();
 
-        final List<Film> populerFilms = populerData
-            .map((e) => Film.fromJson(e as Map<String, dynamic>))
-            .toList();
+      final List<Film> populerFilms = populerData
+          .map((e) => Film.fromJson(e as Map<String, dynamic>))
+          .toList();
 
-        return [...vizyonFilms, ...populerFilms];
-      } else {
-        throw NetworkError('Error', 'Unexpected data structure');
-      }
-    } else {
+      return [...vizyonFilms, ...populerFilms];
+        } else {
       throw NetworkError('Error', 'HTTP request failed');
     }
   } catch (e, stackTrace) {
-    print(stackTrace.toString());
-    print(e.toString());
+    if (kDebugMode) {
+      print(stackTrace.toString());
+    }
+    if (kDebugMode) {
+      print(e.toString());
+    }
     throw NetworkError('Error', e.toString());
   }
 }
